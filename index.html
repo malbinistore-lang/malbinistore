@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VÉRTEX LIFESTYLE STORE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#050505',
+                        darkcard: '#0c0c0c',
+                        darkborder: '#1f1f1f',
+                        gold: '#d4af37',
+                        goldlight: '#f3e5ab',
+                        golddark: '#aa8c2c',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa8c2c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border {
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        .gold-border:hover {
+            border-color: rgba(212, 175, 55, 0.8);
+        }
+        .gold-btn {
+            background: linear-gradient(135deg, #d4af37 0%, #aa8c2c 100%);
+            color: #050505;
+            transition: all 0.3s ease;
+        }
+        .gold-btn:hover {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-white selection:bg-gold selection:text-black">
+
+    <div class="bg-[#080808] border-b border-darkborder text-[11px] uppercase tracking-widest text-gray-400 py-2 px-4 hidden md:flex justify-between items-center">
+        <div class="flex items-center gap-6">
+            <span class="flex items-center gap-2"><i class="fa-solid fa-truck text-gold"></i> Envíos a todo el país</span>
+        </div>
+        <div class="flex items-center gap-8">
+            <span class="hover:text-gold cursor-pointer transition">Productos originales</span>
+            <span class="hover:text-gold cursor-pointer transition">Compra segura</span>
+            <span class="hover:text-gold cursor-pointer transition">Atención personalizada</span>
+        </div>
+        <div class="flex items-center gap-4 text-sm">
+            <a href="#" class="hover:text-gold transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="hover:text-gold transition"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="#" class="hover:text-gold transition"><i class="fa-brands fa-whatsapp"></i></a>
+            <div class="h-3 w-[1px] bg-darkborder"></div>
+            <span class="flex items-center gap-1.5 text-gray-300"><i class="fa-solid fa-magnifying-glass text-gold text-xs"></i> <input type="text" placeholder="Buscar productos..." class="bg-transparent border-b border-gray-700 text-xs text-white focus:outline-none focus:border-gold pb-0.5 w-32"></span>
+            <a href="#" class="hover:text-gold transition"><i class="fa-regular fa-user"></i></a>
+            <button onclick="toggleCart()" class="relative hover:text-gold transition"><i class="fa-solid fa-cart-shopping"></i><span id="cart-counter" class="absolute -top-2 -right-2 bg-gold text-black font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span></button>
+        </div>
+    </div>
+
+    <header class="sticky top-0 z-40 bg-[#050505]/95 backdrop-blur-md border-b border-darkborder px-4 md:px-12 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-12">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded border border-gold flex items-center justify-center text-gold font-bold text-xl group-hover:bg-gold group-hover:text-black transition">
+                    W
+                </div>
+                <div>
+                    <span class="font-extrabold tracking-[0.25em] text-lg block leading-none">VÉRTEX</span>
+                    <span class="text-[9px] tracking-[0.3em] text-gray-400 block mt-1 uppercase">Lifestyle Store</span>
+                </div>
+            </a>
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium tracking-wider">
+                <a href="#inicio" class="text-gold font-semibold transition">INICIO</a>
+                <a href="#tienda" class="text-gray-300 hover:text-gold transition">TIENDA</a>
+                <a href="#categorias" class="text-gray-300 hover:text-gold transition flex items-center gap-1.5">CATEGORÍAS <i class="fa-solid fa-chevron-down text-[10px]"></i></a>
+                <a href="#nosotros" class="text-gray-300 hover:text-gold transition">SOBRE NOSOTROS</a>
+                <a href="#contacto" class="text-gray-300 hover:text-gold transition">CONTACTO</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-6 lg:hidden">
+            <button onclick="toggleCart()" class="relative text-lg text-gray-300 hover:text-gold"><i class="fa-solid fa-cart-shopping"></i><span id="cart-counter-m" class="absolute -top-2 -right-2 bg-gold text-black font-bold text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span></button>
+            <button onclick="toggleMobileMenu()" class="text-xl text-gray-300 hover:text-gold"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-lg flex flex-col justify-center items-center gap-8 text-xl font-medium hidden">
+        <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 text-2xl text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        <a href="#inicio" onclick="toggleMobileMenu()" class="text-gold">INICIO</a>
+        <a href="#tienda" onclick="toggleMobileMenu()" class="hover:text-gold">TIENDA</a>
+        <a href="#categorias" onclick="toggleMobileMenu()" class="hover:text-gold">CATEGORÍAS</a>
+        <a href="#nosotros" onclick="toggleMobileMenu()" class="hover:text-gold">SOBRE NOSOTROS</a>
+        <a href="#contacto" onclick="toggleMobileMenu()" class="hover:text-gold">CONTACTO</a>
+    </div>
+
+    <main class="max-w-[1440px] mx-auto px-4 md:px-12 py-6">
+
+        <section id="inicio" class="relative rounded-2xl overflow-hidden bg-gradient-to-r from-darkcard via-[#121212] to-darkcard border border-darkborder p-8 md:p-16 mb-12 shadow-2xl">
+            <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none text-9font font-black select-none text-gold">V</div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-xs uppercase tracking-[0.3em] text-gray-400 font-semibold block">Tu estilo, en un solo lugar</span>
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-none uppercase">
+                        Lifestyle <br><span class="gold-gradient-text">Sin Límites</span>
+                    </h1>
+                    <div class="flex flex-wrap gap-6 pt-2 text-xs uppercase tracking-widest text-gray-300 font-medium">
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-shoe-prints text-gold"></i> Tenis</span>
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-gem text-gold"></i> Joyas</span>
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-dumbbell text-gold"></i> Proteína</span>
+                        <span class="flex items-center gap-2"><i class="fa-solid fa-wine-bottle text-gold"></i> Destilados</span>
+                    </div>
+                    <div class="pt-4">
+                        <a href="#tienda" class="inline-flex items-center gap-3 gold-btn px-8 py-4 rounded-lg font-bold text-sm tracking-wider uppercase shadow-lg">
+                            Explorar Tienda <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 flex justify-center">
+                    <div class="relative w-full max-w-lg aspect-[16/10] rounded-xl overflow-hidden border border-gold/30 shadow-2xl group">
+                        <img src="https://placehold.co/800x500/0c0c0c/d4af37?text=VERTEX+LIFESTYLE+COLLECTION" alt="Vertex Lifestyle Collection" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+                            <span class="text-xs font-bold tracking-widest text-gold uppercase bg-black/60 px-3 py-1 rounded border border-gold/40">Colección Exclusiva 2026</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="categorias" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-16">
+            <!-- Tenis -->
+            <div onclick="filterCategory('Tenis')" class="group relative rounded-xl overflow-hidden border border-darkborder bg-darkcard p-6 cursor-pointer hover:border-gold transition duration-300">
+                <div class="absolute top-4 right-4 text-gold/40 group-hover:text-gold transition text-xl"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="h-32 mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-[#080808]">
+                    <img src="https://placehold.co/400x300/121212/d4af37?text=TENIS" alt="Tenis" class="max-h-full object-contain group-hover:scale-110 transition duration-500">
+                </div>
+                <h3 class="font-bold text-lg tracking-wide uppercase">Tenis</h3>
+                <p class="text-xs text-gray-400 mt-1">Las mejores marcas</p>
+            </div>
+            <!-- Joyas -->
+            <div onclick="filterCategory('Joyas')" class="group relative rounded-xl overflow-hidden border border-darkborder bg-darkcard p-6 cursor-pointer hover:border-gold transition duration-300">
+                <div class="absolute top-4 right-4 text-gold/40 group-hover:text-gold transition text-xl"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="h-32 mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-[#080808]">
+                    <img src="https://placehold.co/400x300/121212/d4af37?text=JOYAS" alt="Joyas" class="max-h-full object-contain group-hover:scale-110 transition duration-500">
+                </div>
+                <h3 class="font-bold text-lg tracking-wide uppercase">Joyas</h3>
+                <p class="text-xs text-gray-400 mt-1">Estilo que brilla</p>
+            </div>
+            <!-- Proteína -->
+            <div onclick="filterCategory('Proteína')" class="group relative rounded-xl overflow-hidden border border-darkborder bg-darkcard p-6 cursor-pointer hover:border-gold transition duration-300">
+                <div class="absolute top-4 right-4 text-gold/40 group-hover:text-gold transition text-xl"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="h-32 mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-[#080808]">
+                    <img src="https://placehold.co/400x300/121212/d4af37?text=PROTEINA" alt="Proteína" class="max-h-full object-contain group-hover:scale-110 transition duration-500">
+                </div>
+                <h3 class="font-bold text-lg tracking-wide uppercase">Proteína</h3>
+                <p class="text-xs text-gray-400 mt-1">Fuerza y rendimiento</p>
+            </div>
+            <!-- Destilados -->
+            <div onclick="filterCategory('Destilados')" class="group relative rounded-xl overflow-hidden border border-darkborder bg-darkcard p-6 cursor-pointer hover:border-gold transition duration-300">
+                <div class="absolute top-4 right-4 text-gold/40 group-hover:text-gold transition text-xl"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="h-32 mb-4 flex items-center justify-center overflow-hidden rounded-lg bg-[#080808]">
+                    <img src="https://placehold.co/400x300/121212/d4af37?text=DESTILADOS" alt="Destilados" class="max-h-full object-contain group-hover:scale-110 transition duration-500">
+                </div>
+                <h3 class="font-bold text-lg tracking-wide uppercase">Destilados</h3>
+                <p class="text-xs text-gray-400 mt-1">Los mejores sabores</p>
+            </div>
+        </section>
+
+        <section id="tienda" class="mb-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center border-l-4 border-gold pl-4 py-1 mb-8 gap-4">
+                <div>
+                    <h2 class="text-2xl font-extrabold tracking-wide uppercase">Productos Destacados</h2>
+                    <p class="text-xs text-gray-400 mt-0.5">Selección exclusiva de artículos de alta gama</p>
+                </div>
+                <div class="flex items-center gap-3 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+                    <button onclick="filterCategory('Todos')" id="btn-Todos" class="category-filter-btn px-4 py-2 rounded-lg text-xs font-semibold uppercase bg-gold text-black transition">Todos</button>
+                    <button onclick="filterCategory('Tenis')" id="btn-Tenis" class="category-filter-btn px-4 py-2 rounded-lg text-xs font-semibold uppercase bg-darkcard border border-darkborder hover:border-gold transition">Tenis</button>
+                    <button onclick="filterCategory('Joyas')" id="btn-Joyas" class="category-filter-btn px-4 py-2 rounded-lg text-xs font-semibold uppercase bg-darkcard border border-darkborder hover:border-gold transition">Joyas</button>
+                    <button onclick="filterCategory('Proteína')" id="btn-Proteína" class="category-filter-btn px-4 py-2 rounded-lg text-xs font-semibold uppercase bg-darkcard border border-darkborder hover:border-gold transition">Proteína</button>
+                    <button onclick="filterCategory('Destilados')" id="btn-Destilados" class="category-filter-btn px-4 py-2 rounded-lg text-xs font-semibold uppercase bg-darkcard border border-darkborder hover:border-gold transition">Destilados</button>
+                </div>
+            </div>
+
+            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="product-card rounded-xl overflow-hidden bg-darkcard border border-darkborder hover:border-gold/50 transition duration-300 flex flex-col justify-between group" data-category="Tenis">
+                    <div>
+                        <div class="relative aspect-[4/3] bg-[#090909] overflow-hidden p-4 flex items-center justify-center">
+                            <span class="absolute top-3 left-3 bg-black/70 text-gold text-[10px] font-bold px-2.5 py-1 rounded border border-gold/20 uppercase tracking-widest">Tenis</span>
+                            <button onclick="toggleWishlist(this)" class="absolute top-3 right-3 text-gray-400 hover:text-gold transition text-lg w-8 h-8 rounded-full bg-black/40 flex items-center justify-center"><i class="fa-regular fa-heart"></i></button>
+                            <img src="https://placehold.co/500x400/121212/ffffff?text=Air+Jordan+4+White+Cement" alt="Air Jordan 4" class="max-h-full object-contain group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold block mb-1">Tenis</span>
+                            <h3 class="font-bold text-base tracking-wide line-clamp-1">Air Jordan 4 Retro White Cement</h3>
+                            <div class="mt-4 flex items-center justify-between">
+                                <span class="text-gold font-extrabold text-lg">$ 1.299.900</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button onclick="addToCart('Air Jordan 4 Retro White Cement', 1299900)" class="w-full bg-[#161616] hover:bg-gold hover:text-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 border border-darkborder">
+                            <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card rounded-xl overflow-hidden bg-darkcard border border-darkborder hover:border-gold/50 transition duration-300 flex flex-col justify-between group" data-category="Joyas">
+                    <div>
+                        <div class="relative aspect-[4/3] bg-[#090909] overflow-hidden p-4 flex items-center justify-center">
+                            <span class="absolute top-3 left-3 bg-black/70 text-gold text-[10px] font-bold px-2.5 py-1 rounded border border-gold/20 uppercase tracking-widest">Joyas</span>
+                            <button onclick="toggleWishlist(this)" class="absolute top-3 right-3 text-gray-400 hover:text-gold transition text-lg w-8 h-8 rounded-full bg-black/40 flex items-center justify-center"><i class="fa-regular fa-heart"></i></button>
+                            <img src="https://placehold.co/500x400/121212/d4af37?text=Cadena+Cubana+Oro+18K" alt="Cadena Cubana" class="max-h-full object-contain group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold block mb-1">Joyas</span>
+                            <h3 class="font-bold text-base tracking-wide line-clamp-1">Cadena Cubana Oro 18K</h3>
+                            <div class="mt-4 flex items-center justify-between">
+                                <span class="text-gold font-extrabold text-lg">$ 1.199.900</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button onclick="addToCart('Cadena Cubana Oro 18K', 1199900)" class="w-full bg-[#161616] hover:bg-gold hover:text-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 border border-darkborder">
+                            <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card rounded-xl overflow-hidden bg-darkcard border border-darkborder hover:border-gold/50 transition duration-300 flex flex-col justify-between group" data-category="Proteína">
+                    <div>
+                        <div class="relative aspect-[4/3] bg-[#090909] overflow-hidden p-4 flex items-center justify-center">
+                            <span class="absolute top-3 left-3 bg-black/70 text-gold text-[10px] font-bold px-2.5 py-1 rounded border border-gold/20 uppercase tracking-widest">Proteína</span>
+                            <button onclick="toggleWishlist(this)" class="absolute top-3 right-3 text-gray-400 hover:text-gold transition text-lg w-8 h-8 rounded-full bg-black/40 flex items-center justify-center"><i class="fa-regular fa-heart"></i></button>
+                            <img src="https://placehold.co/500x400/121212/ffffff?text=Whey+Gold+Standard" alt="Whey Gold Standard" class="max-h-full object-contain group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold block mb-1">Proteína</span>
+                            <h3 class="font-bold text-base tracking-wide line-clamp-1">Whey Gold Standard 2.27kg</h3>
+                            <div class="mt-4 flex items-center justify-between">
+                                <span class="text-gold font-extrabold text-lg">$ 289.900</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button onclick="addToCart('Whey Gold Standard 2.27kg', 289900)" class="w-full bg-[#161616] hover:bg-gold hover:text-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 border border-darkborder">
+                            <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card rounded-xl overflow-hidden bg-darkcard border border-darkborder hover:border-gold/50 transition duration-300 flex flex-col justify-between group" data-category="Destilados">
+                    <div>
+                        <div class="relative aspect-[4/3] bg-[#090909] overflow-hidden p-4 flex items-center justify-center">
+                            <span class="absolute top-3 left-3 bg-black/70 text-gold text-[10px] font-bold px-2.5 py-1 rounded border border-gold/20 uppercase tracking-widest">Destilados</span>
+                            <button onclick="toggleWishlist(this)" class="absolute top-3 right-3 text-gray-400 hover:text-gold transition text-lg w-8 h-8 rounded-full bg-black/40 flex items-center justify-center"><i class="fa-regular fa-heart"></i></button>
+                            <img src="https://placehold.co/500x400/121212/d4af37?text=Jack+Daniels+Old+No.7" alt="Jack Daniels" class="max-h-full object-contain group-hover:scale-105 transition duration-500">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[10px] uppercase tracking-widest text-gray-400 font-semibold block mb-1">Destilados</span>
+                            <h3 class="font-bold text-base tracking-wide line-clamp-1">Jack Daniel's Old No.7 750ml</h3>
+                            <div class="mt-4 flex items-center justify-between">
+                                <span class="text-gold font-extrabold text-lg">$ 149.900</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0">
+                        <button onclick="addToCart('Jack Daniel\'s Old No.7 750ml', 149900)" class="w-full bg-[#161616] hover:bg-gold hover:text-black text-white py-3 rounded-lg font-bold text-xs uppercase tracking-wider transition flex items-center justify-center gap-2 border border-darkborder">
+                            <i class="fa-solid fa-cart-shopping"></i> Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 py-12 border-t border-b border-darkborder my-16 bg-darkcard/50 rounded-2xl px-6">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xl shrink-0">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm uppercase">Envíos seguros</h4>
+                    <p class="text-xs text-gray-400 mt-0.5">A todo el país</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xl shrink-0">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm uppercase">Productos originales</h4>
+                    <p class="text-xs text-gray-400 mt-0.5">Garantía de autenticidad</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xl shrink-0">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm uppercase">Pagos 100% seguros</h4>
+                    <p class="text-xs text-gray-400 mt-0.5">Tu compra protegida</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gold/10 border border-gold/30 flex items-center justify-center text-gold text-xl shrink-0">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-sm uppercase">Atención personalizada</h4>
+                    <p class="text-xs text-gray-400 mt-0.5">Estamos para ti</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#080808] border-t border-darkborder py-12 px-4 md:px-12 text-center relative overflow-hidden">
+        <div class="max-w-4xl mx-auto space-y-6">
+            <div class="flex items-center justify-center gap-3">
+                <div class="w-8 h-8 rounded border border-gold flex items-center justify-center text-gold font-bold text-sm">W</div>
+                <span class="font-extrabold tracking-[0.25em] text-base">VÉRTEX</span>
+            </div>
+            <p class="text-xs text-gray-400 tracking-wider">Más que productos, es un estilo de vida.</p>
+            <div class="flex justify-center gap-6 text-sm text-gray-300 pt-2">
+                <a href="#" class="hover:text-gold transition">Inicio</a>
+                <a href="#tienda" class="hover:text-gold transition">Tienda</a>
+                <a href="#categorias" class="hover:text-gold transition">Categorías</a>
+                <a href="#nosotros" class="hover:text-gold transition">Sobre Nosotros</a>
+                <a href="#contacto" class="hover:text-gold transition">Contacto</a>
+            </div>
+            <div class="border-t border-darkborder pt-6 text-[11px] text-gray-500">
+                &copy; 2026 VÉRTEX LIFESTYLE STORE. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-[#0a0a0a] border-l border-darkborder shadow-2xl transform translate-x-full transition duration-300 flex flex-col">
+        <div class="p-6 border-b border-darkborder flex items-center justify-between">
+            <h3 class="font-bold text-base uppercase tracking-wider flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-gold"></i> Tu Carrito</h3>
+            <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <p class="text-gray-400 text-center text-sm py-12">Tu carrito está vacío</p>
+        </div>
+        <div class="p-6 border-t border-darkborder bg-[#050505] space-y-4">
+            <div class="flex justify-between items-center text-sm font-semibold">
+                <span>Subtotal:</span>
+                <span id="cart-subtotal" class="text-gold font-extrabold text-lg">$ 0</span>
+            </div>
+            <button onclick="checkout()" class="w-full gold-btn py-3.5 rounded-lg font-bold text-xs uppercase tracking-wider shadow-lg">Proceder al pago</button>
+        </div>
+    </div>
+    <div id="cart-backdrop" onclick="toggleCart()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden"></div>
+
+    <script>
+        // Shopping cart state
+        let cart = [];
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            const backdrop = document.getElementById('cart-backdrop');
+            drawer.classList.toggle('translate-x-full');
+            backdrop.classList.toggle('hidden');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ name, price, qty: 1 });
+            }
+            updateCartUI();
+            toggleCart();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const counter = document.getElementById('cart-counter');
+            const counterM = document.getElementById('cart-counter-m');
+            const subtotalEl = document.getElementById('cart-subtotal');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            counter.innerText = totalItems;
+            counterM.innerText = totalItems;
+
+            if (cart.length === 0) {
+                container.innerHTML = '<p class="text-gray-400 text-center text-sm py-12">Tu carrito está vacío</p>';
+                subtotalEl.innerText = '$ 0';
+                return;
+            }
+
+            let html = '';
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.qty;
+                html += `
+                    <div class="flex items-center justify-between bg-darkcard p-4 rounded-lg border border-darkborder">
+                        <div>
+                            <h4 class="font-bold text-sm">${item.name}</h4>
+                            <span class="text-xs text-gold font-semibold">$ ${item.price.toLocaleString('es-CO')} x ${item.qty}</span>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-gray-500 hover:text-red-400 text-sm"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            subtotalEl.innerText = `$ ${subtotal.toLocaleString('es-CO')}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function checkout() {
+            if (cart.length === 0) return;
+            alert('¡Gracias por tu compra en VÉRTEX LIFESTYLE STORE! Redirigiendo a pasarela de pago segura...');
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+
+        function toggleWishlist(btn) {
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('fa-regular')) {
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid');
+                icon.style.color = '#d4af37';
+            } else {
+                icon.classList.remove('fa-solid');
+                icon.classList.add('fa-regular');
+                icon.style.color = '';
+            }
+        }
+
+        function filterCategory(category) {
+            // Update filter buttons state
+            document.querySelectorAll('.category-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-gold', 'text-black');
+                btn.classList.add('bg-darkcard', 'border', 'border-darkborder');
+            });
+            const activeBtn = document.getElementById(`btn-${category}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-darkcard', 'border', 'border-darkborder');
+                activeBtn.classList.add('bg-gold', 'text-black');
+            }
+
+            // Filter products
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'Todos' || cardCategory === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
